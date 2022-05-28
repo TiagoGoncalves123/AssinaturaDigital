@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+    <head> 
+        <title></title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    </head>
+    <body>
+        <h1>Form</h1>
+        <form action="#" th:action="@{/showNumber}" th:object="${phone}" method="post">
+            <p>Numero de Telemovel: <input type="text" id="phoneNumber" th:field="*{phoneNumber}"  onblur="isEmpty()"/></p>
+            <p><input type="submit" id="submit" value="Submit" disabled/></p>
+            <p id ="phoneTextError"></p>
+        </form>
+    </body>
+
+    <script>
+        function isEmpty() {
+            let phoneNumber = document.getElementById("phoneNumber").value;
+            console.log(phoneNumber);
+            console.log(phoneNumber.toString().length);
+
+            if (phoneNumber.toString().length === 9) {
+                document.getElementById("submit").removeAttribute("disabled");
+                document.getElementById("phoneTextError").innerHTML = "";
+
+            } else if (phoneNumber.toString().length !== 9) {
+                document.getElementById("submit").setAttribute('disabled', '');
+                document.getElementById("phoneTextError").innerHTML = "Phone number format is wrong";
+            }
+        }
+    </script>
+</html>
